@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   ft_lstfree.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: orudek <orudek@student.42madrid.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:32:30 by orudek            #+#    #+#             */
-/*   Updated: 2023/03/31 15:40:12 by orudek           ###   ########.fr       */
+/*   Updated: 2023/09/17 17:22:01 by orudek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+void	ft_lstfree(t_list *lst, void (*del)(void *))
 {
 	t_list	*next;
+	t_list	*aux;
 
-	while (*lst)
+	aux = lst;
+	while (aux)
 	{
-		next = (*lst)->next;
-		ft_lstdelone(*lst, del);
-		*lst = next;
+		next = aux->next;
+		ft_lstdelone(aux, del);
+		aux = next;
 	}
 }
